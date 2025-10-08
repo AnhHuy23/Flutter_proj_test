@@ -68,14 +68,12 @@ class LanguageScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
-                                color: selected
-                                    ? const Color(0xFF50C880)// Màu viền khi chọn
-                                    : const Color(0xFF50C880), // Màu viền khi chọn và không chọn
+                                color: const Color(0xFF50C880),
                                 width: 2,
                               ),
                               color: selected
-                                  ? const Color(0xFF50C880) // Màu nền khi chọn
-                                  :  Colors.white, // Màu nền khi chọn và không chọn
+                                  ? const Color(0xFF50C880)
+                                  : Colors.white,
                             ),
                             child: Row(
                               children: [
@@ -103,46 +101,33 @@ class LanguageScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ======= SIGN UP + BANNER =======
+                // ======= SIGN UP + QUẢNG CÁO (gộp chung) =======
                 Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4ECDC4),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                            elevation: 0,
-                          ),
-                          onPressed: () {
-                            // TODO: xử lý đăng ký hoặc mở dialog
-                          },
-                          child: const Text(
-                            'SIGN UP',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                        ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF50C880), Color.fromARGB(255, 180, 227, 199)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      const SizedBox(height: 12),
-
-                      // ======= QUẢNG CÁO =======
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF4A90E2), Color(0xFF50C9F2)],
-                          ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
                         ),
-                        child: Row(
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Nội dung quảng cáo
+                        Row(
                           children: [
                             Container(
                               padding: const EdgeInsets.all(8),
@@ -153,10 +138,10 @@ class LanguageScreen extends StatelessWidget {
                               child: const Icon(
                                 Icons.workspace_premium,
                                 color: Colors.white,
-                                size: 24,
+                                size: 28,
                               ),
                             ),
-                            const SizedBox(width: 10),
+                            const SizedBox(width: 12),
                             const Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,30 +151,53 @@ class LanguageScreen extends StatelessWidget {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                     ),
                                   ),
-                                  SizedBox(height: 2),
+                                  SizedBox(height: 4),
                                   Text(
                                     'Top answers, no limits.\nExperience the Plus tier.',
                                     style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11,
+                                      color: Colors.white70,
+                                      fontSize: 12,
                                       height: 1.3,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.white,
-                              size: 16,
-                            ),
                           ],
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 16),
+
+                        // Nút SIGN UP trong cùng khung
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              elevation: 0,
+                            ),
+                            onPressed: () {
+                              // TODO: xử lý đăng ký
+                            },
+                            child: const Text(
+                              'SIGN UP',
+                              style: TextStyle(
+                                color: Color(0xFF50C880),
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -200,5 +208,3 @@ class LanguageScreen extends StatelessWidget {
     );
   }
 }
-
-

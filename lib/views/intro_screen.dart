@@ -57,7 +57,7 @@ class _IntroScreenView extends StatelessWidget {
     final viewModel = context.watch<IntroViewModel>();
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 30), // thêm khoảng cách hợp lý
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -94,7 +94,7 @@ class _IntroScreenView extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 28), // khoảng cách giữa dot và banner
+          const SizedBox(height: 28),
 
           _buildAdvertisementBanner(context),
         ],
@@ -105,77 +105,93 @@ class _IntroScreenView extends StatelessWidget {
   /// ----- ADVERTISEMENT BANNER -----
   Widget _buildAdvertisementBanner(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(16),
-      height: 130, // tăng chiều cao banner
       decoration: BoxDecoration(
-        color: const Color(0xFFF4F4F4),
         borderRadius: BorderRadius.circular(16),
+        gradient: const LinearGradient(
+          colors: [Color(0xFF50C880), Color.fromARGB(255, 180, 227, 199)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Logo
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: const Color(0xFF4ECDC4),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Icon(
-              Icons.play_arrow,
-              color: Colors.white,
-              size: 32,
-            ),
-          ),
-          const SizedBox(width: 14),
-
-          // Text mô tả
-          const Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // căn giữa theo chiều cao banner
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hanami',
-                  style: TextStyle(
-                    color: Colors.lightBlueAccent,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+          // Nội dung quảng cáo
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                SizedBox(height: 6),
-                Text(
-                  'Ứng dụng xem truyện hàng đầu Việt Nam! Thỏa sức đắm chìm trong hơn 2000 bộ truyện đa thể loại tại Hanami!',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12.5,
-                    height: 1.3,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                child: const Icon(
+                  Icons.workspace_premium,
+                  color: Colors.white,
+                  size: 28,
                 ),
-              ],
-            ),
-          ),
-
-          const SizedBox(width: 10),
-
-          // Nút Sign Up
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF4ECDC4),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
               ),
-            ),
-            onPressed: () {},
-            child: const Text(
-              'Sign Up',
-              style: TextStyle(
-                fontSize: 13.5,
-                fontWeight: FontWeight.bold,
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Try Moana Plus',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Top answers, no limits.\nExperience the Plus tier.',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                        height: 1.3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // Nút SIGN UP bên trong khung
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0,
+              ),
+              onPressed: () {
+                // TODO: Xử lý khi nhấn nút SIGN UP (nếu cần)
+              },
+              child: const Text(
+                'SIGN UP',
+                style: TextStyle(
+                  color: Color(0xFF50C880),
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
               ),
             ),
           ),
@@ -210,9 +226,9 @@ class _IntroPageItem extends StatelessWidget {
       flex: 2,
       child: Stack(
         children: [
-          // Ảnh nền chính
           Container(
             width: double.infinity,
+            height: 400,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(24),
@@ -224,7 +240,6 @@ class _IntroPageItem extends StatelessWidget {
               ),
             ),
           ),
-          // Gradient mờ nhẹ chỉ ở phần dưới ảnh
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -292,7 +307,7 @@ class _DotIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final distance = (index - currentIndex).abs(); // 0, 1, 2, ...
+    final distance = (index - currentIndex).abs();
     double opacity = 1.0 - (distance * 0.4);
     if (opacity < 0.3) opacity = 0.3;
 
